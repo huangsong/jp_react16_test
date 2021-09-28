@@ -29,6 +29,7 @@
     -webkit-line-clamp: 3;
     overflow: hidden;
     margin: 8px 0;
+    word-break: break-all;
 }
 
 
