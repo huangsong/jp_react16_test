@@ -1,0 +1,22 @@
+.loginTypes {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.gapline {
+    width: 2px;
+    background:  #B4A094;
+    height: 120px;
+}
+
+@media screen and (max-width: 800px) {
+    .loginTypes {
+        padding: 0px;
+    }
+    .gapline {
+        height: 160px;
+    }
+}
