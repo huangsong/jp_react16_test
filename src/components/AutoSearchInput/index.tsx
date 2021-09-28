@@ -17,7 +17,7 @@ const AutoSearchInput = (props: IAutoSearchInputProps) => {
 
     const [showResult, setShowResult] = useState<string[]>([])
 
-    const [searchText, setSearchText] = useState<string>('')
+    //const [searchText, setSearchText] = useState<string>('')
 
     useEffect(() => {
         return () => {
@@ -42,7 +42,7 @@ const AutoSearchInput = (props: IAutoSearchInputProps) => {
     }
 
     const selectSearhTag = (sKey: string) => {
-        setSearchText(sKey)
+        //setSearchText(sKey)
         setShowResult([])
         searchCallback(sKey)
     }
