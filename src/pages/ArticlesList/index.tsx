@@ -40,9 +40,11 @@ const ArticleList = () => {
     }
 
     const goTop = () => {
-        setTimeout(() => {
-            document.getElementById('listlWrap')?.scrollTo(0, 0)
-        }, 100)
+        document.getElementById('listlWrap')?.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        })
     }
 
     return (

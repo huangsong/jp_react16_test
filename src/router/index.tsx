@@ -1,5 +1,5 @@
 import React, { } from 'react';
-import { Switch, Route, useHistory } from 'react-router-dom';
+import { Switch, Route, useHistory,Redirect } from 'react-router-dom';
 import Login from '../pages/Login';
 import ArticlesList from '../pages/ArticlesList';
 import ArticleDetail from '../pages/ArticleDetail';
@@ -15,7 +15,7 @@ const Router = () => {
     if (user.login) {
         return (
             <Switch>
-                <Route path='/' exact component={ArticlesList} />
+                <Redirect to="/articles" exact from='/' /> 
                 <Route path='/articles' exact component={ArticlesList} />
                 <Route path='/detail/:id' component={ArticleDetail} />
                 <Route path='/login' exact component={Login} />
@@ -27,7 +27,7 @@ const Router = () => {
 
     return (
         <Switch>
-            <Route path='/' exact component={Login} />
+            <Redirect to="/login" exact from='/' />
             <Route path='/login' exact component={Login} />
         </Switch>
     )

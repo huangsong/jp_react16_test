@@ -7,7 +7,11 @@ import {Link} from 'react-router-dom'
 const ArticleDetail = (props:any) => {
 
     const goTop = ()=>{
-        document.getElementById('detailWrap')?.scrollTo(0,0)
+        document.getElementById('detailWrap')?.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+          })
     }
 
     return (
