@@ -20,7 +20,7 @@ const ListItem = (props: any) => {
                 <div className={Styles.poseter}>
                     <LazyLoadImg
                         src='https://img.alicdn.com/bao/uploaded/i1/2207626746794/O1CN01gMwL08203hU9QmV93_!!0-item_pic.jpg'
-                        style={{ width: 'auto', height: '26px' }}
+                        style={{ width: '26px', height: '26px' }}
                         imgOptions={{
                             alt: '图片',
                         }}
