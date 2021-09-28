@@ -15,9 +15,7 @@ const ListItem = (props: any) => {
     }
 
     return (
-        <div className={Styles.listItem}
-            
-        >
+        <div className={Styles.listItem}>
             <div>
                 <div className={Styles.poseter}>
                     <LazyLoadImg
@@ -32,6 +30,9 @@ const ListItem = (props: any) => {
                 <h3 className={Styles.postTitle}
                     onClick={jumpToDetail}
                 >
+                    {itemdata.tags.map((tagItem: string,tagIndex:number)=>{
+                        return <span key={tagIndex}>[{tagItem}]</span>
+                    })}
                     {itemdata.title}
                 </h3>
                 <div>{itemdata.time}</div>

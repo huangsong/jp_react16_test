@@ -17,7 +17,7 @@ const AutoSearchInput = (props: IAutoSearchInputProps) => {
 
     const [showResult, setShowResult] = useState<string[]>([])
 
-    //const [inputVal,setInputVal] = useState<string>('')
+    const [searchText, setSearchText] = useState<string>('')
 
     useEffect(() => {
         return () => {
@@ -25,7 +25,7 @@ const AutoSearchInput = (props: IAutoSearchInputProps) => {
         }
     }, [showResult])
 
-    const searchSubmit = () => {
+    const searchInputChange = () => {
 
         let inputKey: string = inputRef.current?.value + '';
 
@@ -41,8 +41,24 @@ const AutoSearchInput = (props: IAutoSearchInputProps) => {
         setShowResult(keyResult)
     }
 
-    const setSearchInput = (sKey: string) => {
+    const selectSearhTag = (sKey: string) => {
+        setSearchText(sKey)
+        setShowResult([])
         searchCallback(sKey)
+    }
+
+    const onSubmit = ()=>{
+        let inputKey: string = inputRef.current?.value + '';
+        setShowResult([])
+        searchCallback(inputKey)
+    }
+
+    const onkeydown = (event: { keyCode: number; })=>{
+        if(event.keyCode === 13){
+            let inputKey: string = inputRef.current?.value + '';
+            setShowResult([])
+            searchCallback(inputKey)
+        }
     }
 
     return (
@@ -53,10 +69,10 @@ const AutoSearchInput = (props: IAutoSearchInputProps) => {
                     placeholder="search"
                     ref={inputRef}
                     className={Styles.searchInput}
-                    onChange={searchSubmit}
-                //value={inputVal}
+                    onKeyDown={onkeydown}
+                    onChange={searchInputChange}
                 />
-                <button type="submit" onClick={searchSubmit} className={Styles.searchBtn}><span className='iconfont icon-search'></span></button>
+                <button type="submit" onClick={onSubmit} className={Styles.searchBtn}><span className='iconfont icon-search'></span></button>
             </div>
             {showResult.length > 0 ? (
                 <ul className={Styles.searchTipsList}>
@@ -66,7 +82,7 @@ const AutoSearchInput = (props: IAutoSearchInputProps) => {
                                 return (
                                     <li key={'key-' + sIndex}
                                         onClick={() => {
-                                            setSearchInput(sItem)
+                                            selectSearhTag(sItem)
                                         }}
                                         className={Styles.searchTipsItem}>{sItem}</li>
                                 )

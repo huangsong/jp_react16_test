@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AutoSearchInput from '../../components/AutoSearchInput'
 import Pagination from '../../components/Pagination';
 import ListItem from './ListItem';
@@ -10,37 +10,39 @@ import {
 } from '../../hooks'
 
 import {
-    articleSearchTags,
-    searchArticleResult
+    showArticles,
+    articleSearchTags
 } from '../../redux/articlesSlice'
 
-import { 
-    Article 
+import {
+    Article
 } from '../../types';
 
 const ArticleList = () => {
 
-    const pageSize: number = 20;
+    const viewArticles: Article[] = useAppSelector(state => state.articles.viewArticles);
 
-    const [viewPage, setViewPage] = useState<number>(0);
+    const viewPage: number = useAppSelector(state => state.articles.page);
 
-    const articles: Article[] = useAppSelector(state => state.articles);
-    const pageTotal: number = parseInt((articles.length / pageSize).toString()) - 1;
-
-    const pageArticles = articles.slice(viewPage * pageSize, pageSize + viewPage * pageSize);
+    const pageTotal: number = useAppSelector(state => state.articles.pageTotal);
 
     const searchTags: string[] = useAppSelector(articleSearchTags)
 
-   // const searchArticleArry:Article[] = useAppSelector(searchArticleResult())
-
-    //const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch()
 
     const pageCallback = (page: number) => {
-        setViewPage(page)
+        dispatch(showArticles({ page: page, sTag: '' }))
+        goTop()
     }
 
     const searchCallback = (sTag: string) => {
+        dispatch(showArticles({ page: 0, sTag: sTag }))
+    }
 
+    const goTop = () => {
+        setTimeout(() => {
+            document.getElementById('listlWrap')?.scrollTo(0, 0)
+        }, 100)
     }
 
     return (
@@ -48,12 +50,14 @@ const ArticleList = () => {
             <header className={Styles.header}>
                 <AutoSearchInput searchTags={searchTags} searchCallback={searchCallback} />
             </header>
-            <div className="wrap-box main-content-container">
-                {
-                    pageArticles.map((aItem: Article) => {
+            <div id="listlWrap" className="wrap-box main-content-container">
+                {viewArticles.length > 0 ? (
+                    viewArticles.map((aItem: Article) => {
                         return <ListItem itemdata={aItem} key={aItem.id} />
                     })
-                }
+                ) : (
+                    <div className={Styles.noResult}>No Result</div>
+                )}
                 <Pagination total={pageTotal} page={viewPage} pageCallback={pageCallback} />
             </div>
         </>

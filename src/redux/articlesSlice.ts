@@ -27,31 +27,70 @@ for(let i = 0; i< 1000;i++){
     })
 }
 
-const initialState:Article[] = testArticleData
+const pageSize: number = 10;
+const pageTotal: number = parseInt((testArticleData.length / pageSize).toString()) - 1;
+
+interface IArticleState {
+    articles:Article[]
+    pageTotal:number
+    viewArticles:Article[]
+    page:number
+}
+
+const initialState:IArticleState = {
+    articles:testArticleData,
+    pageTotal:pageTotal,
+    viewArticles:testArticleData.slice(0 * pageSize, pageSize + 0 * pageSize),
+    page:0
+} 
+
+interface ShowArticleAction {
+    page:number
+    sTag:string
+}
+
 
 export const ArticlesSlice = createSlice({
     name:'articles',
     initialState,
     reducers:{
         refresh:(state,action:PayloadAction<Article[]>)=>{
-            state = action.payload
-        }
+            state.articles = action.payload
+        },
+        showArticles:(state,action:PayloadAction<ShowArticleAction>)=>{
+            state.page = action.payload.page;
+
+            let searchArticles:Article[] = [];
+            if(action.payload.sTag){
+                state.articles.forEach(sAItem=>{
+                    if(sAItem.tags.includes(action.payload.sTag)){
+                        searchArticles.push(sAItem)
+                    }
+                })
+            }else {
+                searchArticles = state.articles;
+            }
+
+            state.viewArticles = searchArticles.slice(action.payload.page * pageSize, pageSize + action.payload.page * pageSize);
+            state.pageTotal = parseInt((searchArticles.length / pageSize).toString()) - 1;
+
+            state = JSON.parse(JSON.stringify(state));
+        },
+        
     }
 })
 
 export const {
-    refresh
+    refresh,
+    showArticles
 } = ArticlesSlice.actions;
 
 export const articles = (state:RootState) => state.articles;
 
-export const searchArticleResult = (state:RootState,sKey:string,page:number) =>{
-    console.log(sKey,page);
-}
 
 export const articleSearchTags = (state:RootState) => {
     let tags : string[] = [];
-    state.articles.forEach(aItem=>{
+    state.articles.articles.forEach(aItem=>{
         aItem.tags.forEach((tItem: string)=>{
             tags.push(tItem)
         })

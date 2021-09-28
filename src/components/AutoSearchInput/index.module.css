@@ -51,10 +51,12 @@
 
 .searchTipsItem {
     list-style-type: none;
-    padding: 6px 10px;
+    padding: 14px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
+    color: #430ea5;
+    font-weight: bold;
 }

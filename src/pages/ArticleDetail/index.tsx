@@ -6,12 +6,16 @@ import {Link} from 'react-router-dom'
 
 const ArticleDetail = (props:any) => {
 
+    const goTop = ()=>{
+        document.getElementById('detailWrap')?.scrollTo(0,0)
+    }
+
     return (
         <>
-            <header id="header" className={Styles.header}>
+            <header className={Styles.header}>
                 <Link to={'/articles'} className="btn"><span className="iconfont icon-fanhui large-icon"></span></Link>
             </header>
-            <div className="wrap-box main-content-container">
+            <div id="detailWrap" className="wrap-box main-content-container">
 
                 <div className={Styles.pageBody}>
                     <h1 className={Styles.pageTitle}>
@@ -46,7 +50,7 @@ const ArticleDetail = (props:any) => {
                     </section>
                 </div>
                 <div>
-                    <a href="#header" className="btn btn-to-top"><span className="iconfont icon-xiangshang"></span>TOP</a>
+                    <button onClick={goTop} className="btn btn-to-top"><span className="iconfont icon-xiangshang"></span>TOP</button>
                 </div>
 
             </div>
