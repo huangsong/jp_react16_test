@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import AutoSearchInput from '../../components/AutoSearchInput'
 import Pagination from '../../components/Pagination';
 import ListItem from './ListItem';

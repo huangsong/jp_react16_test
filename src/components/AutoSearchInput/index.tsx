@@ -66,7 +66,7 @@ const AutoSearchInput = (props: IAutoSearchInputProps) => {
             <div className={Styles.searchInputWrap}>
                 <input
                     type="text"
-                    placeholder="search"
+                    placeholder="search tag"
                     ref={inputRef}
                     className={Styles.searchInput}
                     onKeyDown={onkeydown}
