@@ -13,6 +13,7 @@
     border-top-left-radius: 18px;
     border-top-right-radius: 18px;
     background: #fff;
+    padding-left: 10px;
 }
 
 .searchInput {
@@ -20,7 +21,8 @@
     padding: 15px;
     font-size: 18px;
     line-height: 1;
-    height: 54px;
+    height: 38px;
+    margin: 5px 0;
     border: none;
     width: 100%;
 }
@@ -33,6 +35,7 @@
     padding: 0 18px;
     line-height: 1;
     height: 54px;
+    margin-left: 10px;
 }
 
 .searchBtn span:first-child {
@@ -42,10 +45,9 @@
 .searchTipsList {
     position: absolute;
     left:0;
-    top: 54px;
+    top: 46px;
     border: solid 1px #d0d0d5;
-    border-bottom-left-radius: 18px;
-    border-bottom-right-radius: 18px;
+    border-radius: 8px;
     width: 100%;
     background: #ffffff;
     z-index: 20000;
