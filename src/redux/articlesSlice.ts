@@ -46,7 +46,7 @@ const initialState:IArticleState = {
 
 interface ShowArticleAction {
     page:number
-    sTag:string
+    sTag:string[]
 }
 
 
@@ -61,9 +61,11 @@ export const ArticlesSlice = createSlice({
             state.page = action.payload.page;
 
             let searchArticles:Article[] = [];
-            if(action.payload.sTag){
+            if(action.payload.sTag.length > 0){
                 state.articles.forEach(sAItem=>{
-                    if(sAItem.tags.includes(action.payload.sTag)){
+                    //判断是否有交集
+                    let jAry = sAItem.tags.filter(function(v){ return action.payload.sTag.indexOf(v) > -1 });
+                    if(jAry.length > 0){
                         searchArticles.push(sAItem)
                     }
                 })

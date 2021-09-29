@@ -7,7 +7,8 @@ const ListItem = (props: any) => {
     const history = useHistory();
 
     const {
-        itemdata
+        itemdata,
+        selectTags
     } = props;
 
     const jumpToDetail = () => {
@@ -31,6 +32,9 @@ const ListItem = (props: any) => {
                     onClick={jumpToDetail}
                 >
                     {itemdata.tags.map((tagItem: string,tagIndex:number)=>{
+                        if(selectTags.includes(tagItem)){
+                            return <span style={{color:'red'}} key={tagIndex}>[{tagItem}]</span> 
+                        }
                         return <span key={tagIndex}>[{tagItem}]</span>
                     })}
                     {itemdata.title}
